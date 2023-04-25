@@ -1,47 +1,63 @@
 #include <stdio.h>
 
-void selectionSort(int arr[], int size);
-
-int main() {
-    int size;
-    printf("Enter the number of elements: ");
-    scanf("%d", &size);
-
-    int arr[size];
-    printf("Enter the elements:\n");
-    for (int i = 0; i < size; i++) {
-        scanf("%d", &arr[i]);
-    }
-
-    selectionSort(arr, size);  // sort the array using the selection sort algorithm
-
-    printf("The sorted array is:\n");
-    for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-
-    return 0;
+// Function to swap two elements
+void swap(int *xp, int *yp) {
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
 }
 
-// function to perform the selection sort algorithm
-void selectionSort(int arr[], int size) {
-    int i, j, minIndex, temp;
-
-    // loop through the array
-    for (i = 0; i < size - 1; i++) {
-        minIndex = i;  // assume the current element is the minimum
-
-        // loop through the remaining elements to find the minimum
-        for (j = i + 1; j < size; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;  // update the minimum index
+// Function to perform selection sort
+void selectionSort(int arr[], int n) {
+    int i, j, min_idx;
+    
+    // Traverse through all elements in the array
+    for (i = 0; i < n-1; i++) {
+        min_idx = i; // Assume the first element as the minimum
+        
+        // Find the minimum element in the remaining unsorted array
+        for (j = i+1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j; // Update the minimum index
             }
         }
-
-        // swap the current element with the minimum element
-        temp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = temp;
+        
+        // Swap the found minimum element with the first element
+        swap(&arr[min_idx], &arr[i]);
+        
+        // Print the array after every pass
+        printf("Pass %d: ", i+1);
+        for (j = 0; j < n; j++) {
+            printf("%d ", arr[j]);
+        }
+        printf("\n");
     }
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n); // Input the number of elements
+    
+    int arr[n];
+    printf("Enter the elements of the array: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]); // Input the array elements
+    }
+    
+    printf("Original array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]); // Print the original array
+    }
+    printf("\n");
+    
+    selectionSort(arr, n); // Call selectionSort function to sort the array
+    
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]); // Print the sorted array
+    }
+    printf("\n");
+    
+    return 0;
 }
