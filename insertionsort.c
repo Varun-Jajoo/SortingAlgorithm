@@ -11,13 +11,6 @@ void insertionSort(int arr[], int n) {
             j = j - 1;
         }
         arr[j + 1] = key;
-
-        // Printing array after every pass
-        printf("Pass %d: ", i);
-        for (int k = 0; k < n; k++) {
-            printf("%d ", arr[k]);
-        }
-        printf("\n");
     }
 }
 
@@ -31,12 +24,6 @@ int main() {
     for (int i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
-
-    printf("Original array: ");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
 
     insertionSort(arr, n);
 
